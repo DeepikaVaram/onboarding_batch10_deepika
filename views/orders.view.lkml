@@ -20,7 +20,10 @@ view: orders {
     type: time
     timeframes: [raw, time, date, week, month, quarter, year]
     sql: ${TABLE}.created_at ;;
+    #html: {{ rendered_value | date:"%I %M %p"}};;
   }
+
+
     # Here's what a typical dimension looks like in LookML.
     # A dimension is a groupable field that can be used to filter query results.
     # This dimension will be called "Status" in Explore.
@@ -28,6 +31,16 @@ view: orders {
   dimension: status {
     type: string
     sql: ${TABLE}.status ;;
+    html:
+    {% if value == 'complete' %}
+    <p style="color: black; background-color: lightgreen;">{{ value }}</p>
+    {% elsif value == 'pending' %}
+    <p style="color: black; background-color: blue;">{{ value }}</p>
+    {% else %}
+    <p style="color: white; background-color: orange;">{{ value }}</p>
+    {% endif %}
+    ;;
+    description: "The current status of an existing order."
   }
 
   dimension: traffic_source {

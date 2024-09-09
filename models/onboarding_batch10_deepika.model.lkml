@@ -3,7 +3,7 @@ connection: "thelook_mysql"
 
 # include all the views
 include: "/views/**/*.view.lkml"
-
+include: "/onboarding_D_lookml.dashboard.lookml"
 # Datagroups define a caching policy for an Explore. To learn more,
 # use the Quick Help panel on the right to see documentation.
 
@@ -22,7 +22,7 @@ persist_with: onboarding_batch10_deepika_default_datagroup
 # To see the Explore you’re building, navigate to the Explore menu and select an Explore under "Onboarding Batch10 Deepika"
 
 explore: inventory_items {
-  join: products {
+join: products {
     type: left_outer
     sql_on: ${inventory_items.product_id} = ${products.id} ;;
     relationship: many_to_one
@@ -31,8 +31,7 @@ explore: inventory_items {
 }
 
 explore: order_items {
-
-  join: orders {
+join: orders {
     type: left_outer
     sql_on: ${order_items.order_id} = ${orders.id} ;;
     relationship: many_to_one

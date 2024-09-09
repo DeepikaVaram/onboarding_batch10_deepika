@@ -3,7 +3,7 @@ view: products {
   # The sql_table_name parameter indicates the underlying database table
   # to be used for all fields in this view.
   sql_table_name: thelook.products ;;
-  drill_fields: [id]
+  drill_fields: [id,brand]
 
   # This primary key is the unique key for this table in the underlying database.
   # You need to define a primary key in a view in order to join to other views.
@@ -18,7 +18,10 @@ view: products {
     # This dimension will be called "Brand" in Explore.
 
   dimension: brand {
-    type: string
+    link: {
+      label: "Google"
+      url: "http://www.google.com/search?q={{ value }}"
+      }
     sql: ${TABLE}.brand ;;
   }
 
